@@ -156,16 +156,18 @@ namespace jumpstart_homework
 
         public override string ToString()
         {
+            string result = string.Format("Laptop( Model: {0},Price: {1}", this.Model, this.Price.ToString("C2", CultureInfo.CreateSpecificCulture("bg-BG")));
+
             if (this.Manufacturer != null || this.Processor != null || this.Ram != 0 || this.GraphicsCard != null || this.Hdd != null || this.Screen != null || this.LaptopBattery != null)
             {
                 string emtyField = "empty field";
-                return string.Format("Laptop( Model: {0},Price: {1}, Manufacturer: {2}, Processor: {3}, RAM: {4} GB,Graphics card: {5},HDD:{6},Screen:{7},Battery: {8}",
+                result=result+string.Format(" Manufacturer: {0}, Processor: {1}, RAM: {2} GB,Graphics card: {3},HDD:{4},Screen:{5},Battery: {6}",
                 this.Model, this.Price.ToString("C2", CultureInfo.CreateSpecificCulture("bg-BG")), this.Manufacturer == null ? emtyField : this.Manufacturer,
                 this.Processor == null ? emtyField : this.Processor, this.Ram == 0 ? emtyField : this.Ram.ToString(), this.GraphicsCard == null ? emtyField : this.GraphicsCard,
                 this.Hdd == null ? emtyField : this.Hdd, this.Screen == null ? emtyField : this.Screen, this.LaptopBattery == null ? emtyField : LaptopBattery.ToString());
             }
-            else
-            return string.Format("Laptop( Model: {0},Price: {1}", this.Model, this.Price.ToString("C2", CultureInfo.CreateSpecificCulture("bg-BG")));
+           
+                return result;
         }
     }
 }

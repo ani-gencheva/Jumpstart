@@ -10,6 +10,7 @@ namespace jumpstart_homework
     {
         private string batteryDescription;
         private double batteryLife;
+
         public Battery()
         {
 
@@ -44,8 +45,9 @@ namespace jumpstart_homework
         }
         public override string ToString()
         {
-            string result = "We don't have parameters for battery";
-            if (BatteryDescription != null || BatteryLife != null)
+
+            string result = null;
+            if (BatteryDescription != null || BatteryLife != 0)
             {
                 result = String.Format(
                 "Battery Description:{0}, Battery life:{1} ", this.batteryDescription, this.BatteryLife);

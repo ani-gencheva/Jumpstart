@@ -63,7 +63,12 @@ namespace jumpstart_homework
 
         public override string ToString()
         {
-            return string.Format("Person name: {0},Person  age: {1},Person email:{2}", this.Name, this.Age, this.Email == null ? "email fild is emty" : this.Email);
+            string result =string.Format("Person name: {0},Person  age: {1}", this.Name, this.Age);
+            if (this.Email!=null)
+                return result+string.Format("Person email:{0}",this.Email);
+            else
+            return result;
+           
         }
 
 
