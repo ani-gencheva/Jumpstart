@@ -13,8 +13,10 @@ namespace jumpstart_homework
         private decimal price;
         private string manufacturer;
         private string processor;
-        private string graphicsCard;
         private int ram;
+        private string graphicsCard;
+        private string hdd;
+        private string screen;
         private Battery laptopBattery;
 
         public Laptop(string model, decimal price)
@@ -22,14 +24,16 @@ namespace jumpstart_homework
             this.Model = model;
             this.Price = price;
         }
-        public Laptop(string model, decimal price, string manufacturer, string processor, string graphicsCard,
-        int ram, Battery laptopBattery)
+        public Laptop(string model, decimal price, string manufacturer, string processor, int ram, string graphicsCard,
+        string hdd, string screen, Battery laptopBattery)
             : this(model, price)
         {
             this.Manufacturer = manufacturer;
             this.Processor = processor;
-            this.GraphicsCard = graphicsCard;
             this.Ram = ram;
+            this.GraphicsCard = graphicsCard;
+            this.Hdd = hdd;
+            this.Screen = screen;
             this.LaptopBattery = laptopBattery;
         }
         public string Model
@@ -54,8 +58,8 @@ namespace jumpstart_homework
             }
             set
             {
-                if (value == 0.00M)
-                    throw new ArgumentOutOfRangeException("Choose Price,pleace ");
+                if (value < 0.00M)
+                    throw new ArgumentException("Choose Price,pleace ");
                 else
                     this.price = value;
             }
@@ -95,7 +99,7 @@ namespace jumpstart_homework
             set
             {
                 if (value < 0)
-                    throw new ArgumentNullException("Ram can't be negative");
+                    throw new ArgumentException("Ram can't be negative");
                 else
                     this.ram = value;
             }
@@ -114,6 +118,36 @@ namespace jumpstart_homework
                     this.graphicsCard = value;
             }
         }
+        public string Hdd
+        {
+            get
+            {
+                return this.hdd;
+            }
+            set
+            {
+                if (value == " ")
+                    throw new ArgumentException("Define the HDD of the laptop, please");
+                else
+                    this.hdd = value;
+            }
+        }
+        public string Screen
+        {
+            get
+            {
+                return this.screen;
+            }
+            set
+            {
+                if (value == " ")
+                    throw new ArgumentException("Define the screen of the laptop, please");
+                else
+                    this.screen = value;
+            }
+        }
+
+
         public Battery LaptopBattery
         {
             get { return this.laptopBattery; }
@@ -122,11 +156,16 @@ namespace jumpstart_homework
 
         public override string ToString()
         {
-            string emptyField = "this field is empty";
-            return string.Format("Laptop( Model: {0}, Price: {1}, Manufacturer: {2}, Processor: {3}, Graphics card: {4}, RAM: {5} GB, Battery: {6}",
-                this.Model, this.Price.ToString("C2",CultureInfo.GetCultureInfo("bg-BG")),this.Manufacturer == null ? emptyField : this.Manufacturer,
-            this.Processor == null ? emptyField : this.Processor, this.GraphicsCard == null ? emptyField : this.GraphicsCard,
-            this.Ram == 0 ? emptyField : this.Ram.ToString(), this.LaptopBattery == null ? emptyField : LaptopBattery.ToString());
+            if (this.Manufacturer != null || this.Processor != null || this.Ram != 0 || this.GraphicsCard != null || this.Hdd != null || this.Screen != null || this.LaptopBattery != null)
+            {
+                string emtyField = "empty field";
+                return string.Format("Laptop( Model: {0},Price: {1}, Manufacturer: {2}, Processor: {3}, RAM: {4} GB,Graphics card: {5},HDD:{6},Screen:{7},Battery: {8}",
+                this.Model, this.Price.ToString("C2", CultureInfo.CreateSpecificCulture("bg-BG")), this.Manufacturer == null ? emtyField : this.Manufacturer,
+                this.Processor == null ? emtyField : this.Processor, this.Ram == 0 ? emtyField : this.Ram.ToString(), this.GraphicsCard == null ? emtyField : this.GraphicsCard,
+                this.Hdd == null ? emtyField : this.Hdd, this.Screen == null ? emtyField : this.Screen, this.LaptopBattery == null ? emtyField : LaptopBattery.ToString());
+            }
+            else
+            return string.Format("Laptop( Model: {0},Price: {1}", this.Model, this.Price.ToString("C2", CultureInfo.CreateSpecificCulture("bg-BG")));
         }
     }
 }
